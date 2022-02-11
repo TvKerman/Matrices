@@ -1,0 +1,11 @@
+D:/Git/Matrices/cmake-build-debug/CMakeFiles/Matrices.dir
+D:/Git/Matrices/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Git/Matrices/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/Git/Matrices/cmake-build-debug/libs/CMakeFiles/edit_cache.dir
+D:/Git/Matrices/cmake-build-debug/libs/CMakeFiles/rebuild_cache.dir
+D:/Git/Matrices/cmake-build-debug/libs/data_structures/CMakeFiles/data_structures.dir
+D:/Git/Matrices/cmake-build-debug/libs/data_structures/CMakeFiles/edit_cache.dir
+D:/Git/Matrices/cmake-build-debug/libs/data_structures/CMakeFiles/rebuild_cache.dir
+D:/Git/Matrices/cmake-build-debug/libs/algorithms/CMakeFiles/algorithms.dir
+D:/Git/Matrices/cmake-build-debug/libs/algorithms/CMakeFiles/edit_cache.dir
+D:/Git/Matrices/cmake-build-debug/libs/algorithms/CMakeFiles/rebuild_cache.dir

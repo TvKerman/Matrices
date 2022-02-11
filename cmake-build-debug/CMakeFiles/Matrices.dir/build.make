@@ -87,6 +87,9 @@ Matrices_EXTERNAL_OBJECTS =
 
 Matrices.exe: CMakeFiles/Matrices.dir/main.c.obj
 Matrices.exe: CMakeFiles/Matrices.dir/build.make
+Matrices.exe: libs/algorithms/libalgorithms.a
+Matrices.exe: libs/data_structures/libdata_structures.a
+Matrices.exe: libs/algorithms/libalgorithms.a
 Matrices.exe: CMakeFiles/Matrices.dir/linklibs.rsp
 Matrices.exe: CMakeFiles/Matrices.dir/objects1.rsp
 Matrices.exe: CMakeFiles/Matrices.dir/link.txt

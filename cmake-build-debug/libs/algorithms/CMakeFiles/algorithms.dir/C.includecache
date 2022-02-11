@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Git/Matrices/libs/algorithms/algorithm.c
+algorithm.h
+D:/Git/Matrices/libs/algorithms/algorithm.h
+
+D:/Git/Matrices/libs/algorithms/algorithm.h
+
+D:/Git/Matrices/libs/algorithms/array/array.c
+array.h
+D:/Git/Matrices/libs/algorithms/array/array.h
+stdio.h
+-
+limits.h
+-
+assert.h
+-
+
+D:/Git/Matrices/libs/algorithms/array/array.h
+stddef.h
+-
+

@@ -6,5 +6,5 @@ set(CMAKE_C_STANDARD 11)
 add_executable(Matrices main.c)
 
 add_subdirectory(libs)
-target_link_libraries(algorithms)
-target_link_libraries(data_structures)
+target_link_libraries(Matrices algorithms)
+target_link_libraries(Matrices data_structures)

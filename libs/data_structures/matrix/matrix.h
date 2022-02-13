@@ -50,4 +50,6 @@ bool isEMatrix(matrix m);
 
 bool isSymmetricMatrix(matrix m);
 
+void transposeSquareMatrix(matrix m);
+
 #endif //MATRICES_MATRIX_H

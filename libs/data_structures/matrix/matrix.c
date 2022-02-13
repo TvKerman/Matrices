@@ -197,3 +197,16 @@ bool isSymmetricMatrix(matrix m) {
 
     return true;
 }
+
+void transposeSquareMatrix(matrix m) {
+    if (!isSquareMatrix(m)) {
+        fprintf(stderr, "is not square matrix");
+        exit(1);
+    }
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = i; j < m.nCols; j++) {
+            swap(&m.values[i][j], &m.values[j][i]);
+        }
+    }
+}

@@ -6,3 +6,11 @@
 
 #IncludeRegexTransform: 
 
+D:/Git/Matrices/libs/data_structures/matrix/matrix.h
+
+D:/Git/Matrices/main.c
+stdio.h
+-
+libs/data_structures/matrix/matrix.h
+D:/Git/Matrices/libs/data_structures/matrix/matrix.h
+

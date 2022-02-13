@@ -5,7 +5,12 @@
 #include "matrix.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
+
+static void swap(int *a, int *b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
 
 matrix getMemMatrix(int nRows, int nCols) {
     int **values = (int **)malloc(sizeof(int *) * nRows);
@@ -55,7 +60,7 @@ void outputMatrix(matrix m) {
     for (int i = 0; i < m.nRows; i++) {
         printf("|");
         for (int j = 0; j < m.nCols; j++) {
-            printf("%3.d, ", m.values[i][j]);
+            printf("%3.1d, ", m.values[i][j]);
         }
         printf("\b\b|\n");
     }
@@ -90,4 +95,51 @@ void swapColumns(matrix m, int j1, int j2) {
         m.values[i][j1] = m.values[i][j2];
         m.values[i][j2] = t;
     }
+}
+
+void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int)) {
+    int *b = (int *)malloc(m.nRows * sizeof(int));
+
+    for (int i = 0; i < m.nRows; i++) {
+        b[i] = criteria(m.values[i], m.nCols);
+    }
+
+    for (int i = 0; i < m.nRows - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < m.nRows; j++) {
+            if (b[j] < b[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swapRows(m, minIndex, i);
+        swap(&b[minIndex], &b[i]);
+    }
+
+    free(b);
+}
+
+void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int)) {
+    int *a = (int *)malloc(m.nRows * sizeof(int));
+    int *b = (int *)malloc(m.nCols * sizeof(int));
+
+    for (int i = 0; i < m.nCols; i++) {
+        for (int j = 0; j < m.nRows; j++) {
+            a[j] = m.values[j][i];
+        }
+        b[i] = criteria(a, m.nRows);
+    }
+
+    for (int i = 0; i < m.nCols - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < m.nCols; j++) {
+            if (b[j] < b[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swapColumns(m, minIndex, i);
+        swap(&b[minIndex], &b[i]);
+    }
+
+    free(a);
+    free(b);
 }

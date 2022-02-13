@@ -5,6 +5,8 @@
 #ifndef MATRICES_MATRIX_H
 #define MATRICES_MATRIX_H
 
+#include <stdbool.h>
+
 typedef struct matrix {
     int **values;       // Элементы матрицы
     int nRows;          // Количество рядов
@@ -39,5 +41,13 @@ void swapColumns(matrix m, int j1, int j2);
 void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int *, int));
 
 void insertionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int *, int));
+
+bool isSquareMatrix(matrix m);
+
+bool twoMatricesEqual(matrix m1, matrix m2);
+
+bool isEMatrix(matrix m);
+
+bool isSymmetricMatrix(matrix m);
 
 #endif //MATRICES_MATRIX_H

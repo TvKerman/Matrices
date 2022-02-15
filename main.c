@@ -518,6 +518,10 @@ int max(int a, int b) {
     return a > b ? a: b;
 }
 
+int min(int a, int b) {
+    return a < b ? a: b;
+}
+
 long long findSumOfMaxesOfPseudoDiagonal(matrix m) {
     int n = m.nRows + m.nCols;
     int sizeA = 0;
@@ -563,6 +567,38 @@ void solvingProblemNumberSeven() {
     freeMemMatrix(m);
 }
 
+int getMinInArea(matrix m) {
+    position maxPos = getMaxValuePos(m);
+
+    int minValue = m.values[maxPos.rowIndex][maxPos.colIndex];
+    for (int i = maxPos.rowIndex - 1; i >= 0; i--) {
+        int difference = maxPos.rowIndex - i;
+
+        position currentPos;
+        currentPos.rowIndex = i;
+        currentPos.colIndex = max(maxPos.colIndex - difference, 0);
+
+        int distance = difference * 2 + 1;
+        for (int j = 0; j < distance && currentPos.colIndex < m.nCols; j++) {
+            minValue = min(minValue, m.values[currentPos.rowIndex][currentPos.colIndex++]);
+        }
+    }
+
+    return minValue;
+}
+
+void solvingProblemNumberEight() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    printf("%d", getMinInArea(m));
+
+    freeMemMatrix(m);
+}
+
 
 int main() {
     test();
@@ -572,6 +608,7 @@ int main() {
     //solvingProblemNumberFour();
     //solvingProblemNumberFive();
     //solvingProblemNumberSix();
-    solvingProblemNumberSeven();
+    //solvingProblemNumberSeven();
+    solvingProblemNumberEight();
     return 0;
 }

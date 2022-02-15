@@ -486,12 +486,41 @@ void solvingProblemNumberFive() {
     freeMemMatrix(m);
 }
 
+bool isMutuallyInverseMatrices(matrix m1, matrix m2) {
+    matrix m = mulMatrices(m1, m2);
+    return isEMatrix(m);
+}
+
+void solvingProblemNumberSix() {
+    int row1, col1;
+    scanf("%d %d", &row1, &col1);
+
+    matrix m1 = getMemMatrix(row1, col1);
+    inputMatrix(m1);
+
+    int row2, col2;
+    scanf("%d %d", &row2, &col2);
+
+    matrix m2 = getMemMatrix(row2, col2);
+    inputMatrix(m2);
+
+    if (isMutuallyInverseMatrices(m1, m2)) {
+        printf("True");
+    } else {
+        printf("False");
+    }
+
+    freeMemMatrix(m1);
+    freeMemMatrix(m2);
+}
+
 int main() {
     test();
     //solvingProblemNumberOne();
     //solvingProblemNumberTwo();
     //solvingProblemNumberThree();
     //solvingProblemNumberFour();
-    solvingProblemNumberFive();
+    //solvingProblemNumberFive();
+    solvingProblemNumberSix();
     return 0;
 }

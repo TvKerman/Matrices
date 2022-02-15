@@ -398,10 +398,54 @@ void solvingProblemNumberThree() {
     freeMemMatrix(m);
 }
 
+
+matrix mulMatrices(matrix m1, matrix m2) {
+    if (m1.nCols != m2.nRows) {
+        fprintf(stderr, "it is impossible to multiply matrices");
+        exit(1);
+    }
+
+    matrix m = getMemMatrix(m1.nRows, m2.nCols);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            int sum = 0;
+            for (int index = 0; index < m1.nCols; index++) {
+                sum += m1.values[i][index] * m2.values[index][j];
+            }
+            m.values[i][j] = sum;
+        }
+    }
+
+    return m;
+}
+
+void getSquareOfMatrixIfSymmetric(matrix *m) {
+    if (isSymmetricMatrix(*m)) {
+        *m = mulMatrices(*m, *m);
+    }
+}
+
+void solvingProblemNumberFour() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    getSquareOfMatrixIfSymmetric(&m);
+
+    outputMatrix(m);
+
+    freeMemMatrix(m);
+}
+
+
 int main() {
     test();
     //solvingProblemNumberOne();
     //solvingProblemNumberTwo();
-    solvingProblemNumberThree();
+    //solvingProblemNumberThree();
+    solvingProblemNumberFour();
     return 0;
 }

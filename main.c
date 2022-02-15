@@ -326,6 +326,22 @@ void test() {
     test_getMaxValuePos();
 }
 
+void solvingProblemNumberOne() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    position minPos = getMinValuePos(m);
+    position maxPos = getMaxValuePos(m);
+    swapColumns(m, minPos.colIndex, maxPos.colIndex);
+
+    outputMatrix(m);
+
+    freeMemMatrix(m);
+}
+
 int main() {
     test();
     return 0;

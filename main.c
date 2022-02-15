@@ -342,7 +342,37 @@ void solvingProblemNumberOne() {
     freeMemMatrix(m);
 }
 
+int getMax(int *a, int n) {
+    int max = a[0];
+    for (int i = 1; i < n; i++) {
+        if (a[i] > max) {
+            max = a[i];
+        }
+    }
+    return max;
+}
+
+void sortRowsByMinElement(matrix m) {
+    insertionSortRowsMatrixByRowCriteria(m, getMax);
+}
+
+void solvingProblemNumberTwo() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    sortRowsByMinElement(m);
+
+    outputMatrix(m);
+
+    freeMemMatrix(m);
+}
+
 int main() {
     test();
+    //solvingProblemNumberOne();
+    solvingProblemNumberTwo();
     return 0;
 }

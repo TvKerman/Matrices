@@ -514,6 +514,56 @@ void solvingProblemNumberSix() {
     freeMemMatrix(m2);
 }
 
+int max(int a, int b) {
+    return a > b ? a: b;
+}
+
+long long findSumOfMaxesOfPseudoDiagonal(matrix m) {
+    int n = m.nRows + m.nCols;
+    int sizeA = 0;
+    int *a = (int *)malloc((n - 1) * sizeof(int));
+    for (int i = 1; i < n; i++) {
+        position currentPos;
+        currentPos.rowIndex = m.nRows > i ? (m.nRows - i) : 0;
+        currentPos.colIndex = i >= m.nRows ? (i - m.nRows) : 0;
+
+        int maxValue = m.values[currentPos.rowIndex][currentPos.colIndex];
+        while (currentPos.rowIndex < m.nRows && currentPos.colIndex < m.nCols) {
+            maxValue = max(maxValue, m.values[currentPos.rowIndex++][currentPos.colIndex++]);
+        }
+
+        bool isUniqueValue = true;
+        for (int j = 0; j < sizeA; j++) {
+            if (maxValue == a[j]) {
+                isUniqueValue = false;
+            }
+        }
+
+        if (isUniqueValue) {
+            a[sizeA++] = maxValue;
+        }
+    }
+
+    long long result = getSum(a, sizeA);
+
+    free(a);
+
+    return result;
+}
+
+void solvingProblemNumberSeven() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    printf("%lld", findSumOfMaxesOfPseudoDiagonal(m));
+
+    freeMemMatrix(m);
+}
+
+
 int main() {
     test();
     //solvingProblemNumberOne();
@@ -521,6 +571,7 @@ int main() {
     //solvingProblemNumberThree();
     //solvingProblemNumberFour();
     //solvingProblemNumberFive();
-    solvingProblemNumberSix();
+    //solvingProblemNumberSix();
+    solvingProblemNumberSeven();
     return 0;
 }

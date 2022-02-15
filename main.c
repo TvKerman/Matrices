@@ -440,12 +440,58 @@ void solvingProblemNumberFour() {
     freeMemMatrix(m);
 }
 
+bool isUnique(long long *a, int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (a[i] == a[j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+long long getSum(int *a, int n) {
+    long long sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += a[i];
+    }
+    return sum;
+}
+
+void transposeIfMatrixHasNotEqualSumOfRows(matrix m) {
+    long long *a = (long long *)malloc(m.nRows * sizeof(long long));
+    for (int i = 0; i < m.nRows; i++) {
+        a[i] = getSum(m.values[i], m.nCols);
+    }
+
+    if (isUnique(a, m.nRows)) {
+        transposeSquareMatrix(m);
+    }
+
+    free(a);
+}
+
+void solvingProblemNumberFive() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    transposeIfMatrixHasNotEqualSumOfRows(m);
+
+    outputMatrix(m);
+
+    freeMemMatrix(m);
+}
 
 int main() {
     test();
     //solvingProblemNumberOne();
     //solvingProblemNumberTwo();
     //solvingProblemNumberThree();
-    solvingProblemNumberFour();
+    //solvingProblemNumberFour();
+    solvingProblemNumberFive();
     return 0;
 }

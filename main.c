@@ -370,9 +370,38 @@ void solvingProblemNumberTwo() {
     freeMemMatrix(m);
 }
 
+int getMin(int *a, int n) {
+    int min = a[0];
+    for (int i = 1; i < n; i++) {
+        if (a[i] < min) {
+            min = a[i];
+        }
+    }
+    return min;
+}
+
+void sortColsByMinElement(matrix m) {
+    insertionSortColsMatrixByColCriteria(m, getMin);
+}
+
+void solvingProblemNumberThree() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    sortColsByMinElement(m);
+
+    outputMatrix(m);
+
+    freeMemMatrix(m);
+}
+
 int main() {
     test();
     //solvingProblemNumberOne();
-    solvingProblemNumberTwo();
+    //solvingProblemNumberTwo();
+    solvingProblemNumberThree();
     return 0;
 }

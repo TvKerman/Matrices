@@ -9,9 +9,15 @@
 D:/Git/Matrices/libs/data_structures/matrix/matrix.h
 stdbool.h
 -
+stdio.h
+-
+stdlib.h
+-
 
 D:/Git/Matrices/main.c
 stdio.h
+-
+assert.h
 -
 libs/data_structures/matrix/matrix.h
 D:/Git/Matrices/libs/data_structures/matrix/matrix.h

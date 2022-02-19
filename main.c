@@ -882,6 +882,60 @@ void solvingProblemNumberFourteen() {
     freeMemMatrices(ms, n);
 }
 
+double absD(double a) {
+    return a > 0 ? a: -a;
+}
+
+double getMaxAbsoluteValue(matrixD m) {
+    double maxAbsoluteValue = m.values[0][0];
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            if (maxAbsoluteValue < absD(m.values[i][j])) {
+                maxAbsoluteValue = m.values[i][j];
+            }
+        }
+    }
+
+    return maxAbsoluteValue;
+}
+
+void printMatrixDWithMinMaxValue(matrixD *ms, int nMatrix) {
+    double eps = 0.00001;
+    double minStandard = getMaxAbsoluteValue(ms[0]);
+    double *a = (double *)malloc(nMatrix * sizeof(double ));
+
+    for (int i = 1; i < nMatrix; i++) {
+        double currentStandard = getMaxAbsoluteValue(ms[i]);
+
+        a[i] = currentStandard;
+        if (currentStandard < minStandard) {
+            minStandard = currentStandard;
+        }
+    }
+
+    for (int i = 0; i < nMatrix; i++) {
+        if (absD(minStandard - a[i]) < eps) {
+            outputMatrixD(ms[i]);
+            printf("\n");
+        }
+    }
+
+    free(a);
+}
+
+void solvingProblemNumberFifteen() {
+    int row, col, n;
+    scanf("%d %d %d", &row, &col, &n);
+
+    matrixD *ms = getMemArrayOfMatricesD(n, row, col);
+    inputMatricesD(ms, n);
+
+    printMatrixDWithMinMaxValue(ms, n);
+
+    freeMemMatricesD(ms, n);
+}
+
+
 int main() {
     test();
     //solvingProblemNumberOne();
@@ -897,7 +951,8 @@ int main() {
     //solvingProblemNumberEleven();
     //solvingProblemNumberTwelve();
     //solvingProblemNumberThirteen();
-    solvingProblemNumberFourteen();
+    //solvingProblemNumberFourteen();
+    solvingProblemNumberFifteen();
 
     return 0;
 }

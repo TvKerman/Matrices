@@ -784,6 +784,47 @@ void solvingProblemNumberTwelve() {
     freeMemMatrix(m);
 }
 
+bool isNonDescendingSorted(int *a, int n) {
+    for (int i = 1; i < n; i++) {
+        if (a[i - 1] > a[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool hasAllNonDescendingRows(matrix m) {
+    for (int i = 0; i < m.nRows; i++) {
+        if (!isNonDescendingSorted(m.values[i], m.nCols)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int countNonDescendingRowsMatrices(matrix *ms, int nMatrix) {
+    int count = 0;
+    for (int i = 0; i < nMatrix; i++) {
+        count += hasAllNonDescendingRows(ms[i]);
+    }
+
+    return count;
+}
+
+void solvingProblemNumberThirteen() {
+    int row, col, n;
+    scanf("%d %d %d", &row, &col, &n);
+
+    matrix *ms = getMemArrayOfMatrices(n, row, col);
+    inputMatrices(ms, n);
+
+    printf("%d\n", countNonDescendingRowsMatrices(ms, n));
+    //outputMatrices(ms, n);
+
+    freeMemMatrices(ms, n);
+}
+
 int main() {
     test();
     //solvingProblemNumberOne();
@@ -797,7 +838,8 @@ int main() {
     //solvingProblemNumberNine();
     //solvingProblemNumberTen();
     //solvingProblemNumberEleven();
-    solvingProblemNumberTwelve();
+    //solvingProblemNumberTwelve();
+    solvingProblemNumberThirteen();
 
     return 0;
 }

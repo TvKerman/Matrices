@@ -747,6 +747,43 @@ void solvingProblemNumberEleven() {
     freeMemMatrix(m);
 }
 
+position getLeftMin(matrix m) {
+    position minPos = {0, 0};
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            if ((m.values[minPos.rowIndex][minPos.colIndex] > m.values[i][j]) ||
+                    (m.values[minPos.rowIndex][minPos.colIndex] == m.values[i][j] && minPos.colIndex > j)) {
+                minPos.rowIndex = i;
+                minPos.colIndex = j;
+            }
+        }
+    }
+
+    return minPos;
+}
+
+void swapPenultimateRow(matrix m, int n) {
+    for (int i = m.nCols - 1; i >= 0; i--) {
+        m.values[m.nRows - 2][i] = m.values[i][n];
+    }
+}
+
+void solvingProblemNumberTwelve() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    position pos = getLeftMin(m);
+    swapPenultimateRow(m, pos.colIndex);
+
+    outputMatrix(m);
+
+    freeMemMatrix(m);
+}
+
 int main() {
     test();
     //solvingProblemNumberOne();
@@ -759,7 +796,8 @@ int main() {
     //solvingProblemNumberEight();
     //solvingProblemNumberNine();
     //solvingProblemNumberTen();
-    solvingProblemNumberEleven();
+    //solvingProblemNumberEleven();
+    solvingProblemNumberTwelve();
 
     return 0;
 }

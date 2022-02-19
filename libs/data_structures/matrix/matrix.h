@@ -15,6 +15,12 @@ typedef struct matrix {
     int nCols;          // Количество столбцов
 } matrix;
 
+typedef struct matrixD {
+    double **values;       // Элементы матрицы
+    int nRows;          // Количество рядов
+    int nCols;          // Количество столбцов
+} matrixD;
+
 typedef struct position {
     int rowIndex;
     int colIndex;
@@ -61,5 +67,19 @@ position getMaxValuePos(matrix m);
 matrix createMatrixFromArray(const int *a, size_t nRows, size_t nCols);
 
 matrix *createArrayOfMatrixFromArray(const int *values, size_t nMatrices, size_t nRows, size_t nCols);
+
+matrixD getMemMatrixD(int nRows, int nCols);
+
+matrixD *getMemArrayOfMatricesD(int nMatrices, int nRows, int nCols);
+
+void freeMemMatrixD(matrixD m);
+
+void freeMemMatricesD(matrixD *ms, int nMatrices);
+
+void inputMatrixD(matrixD m);
+
+void inputMatricesD(matrixD *ms, int nMatrices);
+
+void outputMatrixD(matrixD m);
 
 #endif //MATRICES_MATRIX_H

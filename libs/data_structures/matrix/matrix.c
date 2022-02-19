@@ -186,7 +186,7 @@ bool isSymmetricMatrix(matrix m) {
     }
 
     for (int i = 0; i < m.nRows; i++) {
-        for (int j = 0; j < m.nCols; j++) {
+        for (int j = i + 1; j < m.nCols; j++) {
             if (m.values[i][j] != m.values[j][i]) {
                 return false;
             }
@@ -203,7 +203,7 @@ void transposeSquareMatrix(matrix m) {
     }
 
     for (int i = 0; i < m.nRows; i++) {
-        for (int j = i; j < m.nCols; j++) {
+        for (int j = i + 1; j < m.nCols; j++) {
             swap(&m.values[i][j], &m.values[j][i]);
         }
     }

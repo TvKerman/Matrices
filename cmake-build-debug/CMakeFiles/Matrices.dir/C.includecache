@@ -19,6 +19,8 @@ stdio.h
 -
 assert.h
 -
+math.h
+-
 libs/data_structures/matrix/matrix.h
 D:/Git/Matrices/libs/data_structures/matrix/matrix.h
 

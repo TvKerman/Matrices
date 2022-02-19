@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
+#include <math.h>
 #include "libs/data_structures/matrix/matrix.h"
 
 int sumRowOrColumns(int *a, int sizeA) {
@@ -8,6 +9,12 @@ int sumRowOrColumns(int *a, int sizeA) {
         sum += a[i];
     }
     return sum;
+}
+
+void swap(float *a, float *b) {
+    float t = *a;
+    *a = *b;
+    *b = t;
 }
 
 void test_swapRows_usualMatrix() {
@@ -340,6 +347,7 @@ void solvingProblemNumberOne() {
     outputMatrix(m);
 
     freeMemMatrix(m);
+    
 }
 
 int getMax(int *a, int n) {
@@ -599,6 +607,52 @@ void solvingProblemNumberEight() {
     freeMemMatrix(m);
 }
 
+float getDistance(int *a, int n) {
+    long long distance = 0;
+    for (int i = 0; i < n; i++) {
+        distance += a[i] * a[i];
+    }
+    return sqrt(distance);
+}
+
+void insertionSortRowsMatrixByRowCriteriaF(matrix m, float (*criteria)(int *, int)) {
+    float *b = (float *)malloc(m.nRows * sizeof(float));
+
+    for (int i = 0; i < m.nRows; i++) {
+        b[i] = criteria(m.values[i], m.nCols);
+    }
+
+    for (int i = 0; i < m.nRows - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < m.nRows; j++) {
+            if (b[j] < b[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swapRows(m, minIndex, i);
+        swap(&b[minIndex], &b[i]);
+    }
+
+    free(b);
+}
+
+void sortByDistances(matrix m) {
+    insertionSortRowsMatrixByRowCriteriaF(m, getDistance);
+}
+
+void solvingProblemNumberNine() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    sortByDistances(m);
+
+    outputMatrix(m);
+
+    freeMemMatrix(m);
+}
 
 int main() {
     test();
@@ -609,6 +663,8 @@ int main() {
     //solvingProblemNumberFive();
     //solvingProblemNumberSix();
     //solvingProblemNumberSeven();
-    solvingProblemNumberEight();
+    //solvingProblemNumberEight();
+    solvingProblemNumberNine();
+
     return 0;
 }

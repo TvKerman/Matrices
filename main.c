@@ -713,6 +713,40 @@ void solvingProblemNumberTen() {
     freeMemMatrix(m);
 }
 
+int getNSpecialElement(matrix m) {
+    int count = 0;
+    for (int j = 0; j < m.nCols; j++) {
+        int max = m.values[0][j];
+        int sum = 0;
+        for (int i = 1; i < m.nRows; i++) {
+            if (m.values[i][j] > max) {
+                sum += max;
+                max = m.values[i][j];
+            } else {
+                sum += m.values[i][j];
+            }
+        }
+
+        if (max > sum) {
+            count += 1;
+        }
+    }
+
+    return count;
+}
+
+void solvingProblemNumberEleven() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    printf("%d", getNSpecialElement(m));
+
+    freeMemMatrix(m);
+}
+
 int main() {
     test();
     //solvingProblemNumberOne();
@@ -724,7 +758,8 @@ int main() {
     //solvingProblemNumberSeven();
     //solvingProblemNumberEight();
     //solvingProblemNumberNine();
-    solvingProblemNumberTen();
+    //solvingProblemNumberTen();
+    solvingProblemNumberEleven();
 
     return 0;
 }

@@ -825,6 +825,63 @@ void solvingProblemNumberThirteen() {
     freeMemMatrices(ms, n);
 }
 
+int countValues(const int *a, int n, int value) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (a[i] == value) {
+            count += 1;
+        }
+    }
+
+    return count;
+}
+
+int countZeroRows(matrix m) {
+    int count = 0;
+    for (int i = 0; i < m.nRows; i++) {
+        if (countValues(m.values[i], m.nCols, 0) == m.nCols) {
+            count += 1;
+        }
+    }
+
+    return count;
+}
+
+void printMatrixWithMaxZeroRows(matrix *ms, int nMatrix) {
+    int maxCount = 0;
+    int *a = (int *)malloc(nMatrix * sizeof(int));
+
+    for (int i = 0; i < nMatrix; i++) {
+        int currentCount = countZeroRows(ms[i]);
+
+        a[i] = currentCount;
+        if (currentCount > maxCount) {
+            maxCount = currentCount;
+        }
+    }
+
+    for (int i = 0; i < nMatrix; i++) {
+        if (maxCount == a[i]) {
+            outputMatrix(ms[i]);
+            printf("\n");
+        }
+    }
+
+    free(a);
+}
+
+void solvingProblemNumberFourteen() {
+    int row, col, n;
+    scanf("%d %d %d", &row, &col, &n);
+
+    matrix *ms = getMemArrayOfMatrices(n, row, col);
+    inputMatrices(ms, n);
+
+    printMatrixWithMaxZeroRows(ms, n);
+
+    freeMemMatrices(ms, n);
+}
+
 int main() {
     test();
     //solvingProblemNumberOne();
@@ -839,7 +896,8 @@ int main() {
     //solvingProblemNumberTen();
     //solvingProblemNumberEleven();
     //solvingProblemNumberTwelve();
-    solvingProblemNumberThirteen();
+    //solvingProblemNumberThirteen();
+    solvingProblemNumberFourteen();
 
     return 0;
 }

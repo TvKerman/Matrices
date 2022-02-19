@@ -496,7 +496,9 @@ void solvingProblemNumberFive() {
 
 bool isMutuallyInverseMatrices(matrix m1, matrix m2) {
     matrix m = mulMatrices(m1, m2);
-    return isEMatrix(m);
+    bool isInverseMatrices = isEMatrix(m);
+    freeMemMatrix(m);
+    return isInverseMatrices;
 }
 
 void solvingProblemNumberSix() {
@@ -654,6 +656,63 @@ void solvingProblemNumberNine() {
     freeMemMatrix(m);
 }
 
+int cmp_long_long(const void *pa, const void *pb) {
+    long long arg1 = *(const long long *)pa;
+    long long arg2 = *(const long long *)pb;
+
+    if (arg1 < arg2) {
+        return -1;
+    } else if (arg1 > arg2) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int countNUnique(long long *a, int n) {
+    if (n == 0) {
+        return 0;
+    }
+
+    int count = 1;
+    long long previousClass = a[0];
+    for (int i = 1; i < n; i++) {
+        if (previousClass != a[i]) {
+            count += 1;
+        }
+
+        previousClass = a[i];
+    }
+
+    return count;
+}
+
+int countEqClassesByRowsSum(matrix m)  {
+    long long *a = (long long *)malloc(m.nRows * sizeof(long long));
+    for (int i = 0; i < m.nRows; i++) {
+        a[i] = getSum(m.values[i], m.nCols);
+    }
+
+    qsort(a, m.nRows, sizeof(long long), cmp_long_long);
+
+    int count = countNUnique(a, m.nRows);
+
+    free(a);
+    return count;
+}
+
+void solvingProblemNumberTen() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    printf("%d", countEqClassesByRowsSum(m));
+
+    freeMemMatrix(m);
+}
+
 int main() {
     test();
     //solvingProblemNumberOne();
@@ -664,7 +723,8 @@ int main() {
     //solvingProblemNumberSix();
     //solvingProblemNumberSeven();
     //solvingProblemNumberEight();
-    solvingProblemNumberNine();
+    //solvingProblemNumberNine();
+    solvingProblemNumberTen();
 
     return 0;
 }

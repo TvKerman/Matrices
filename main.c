@@ -966,7 +966,7 @@ void solvingProblemNumberSixteen() {
     matrix m = getMemMatrix(row, col);
     inputMatrix(m);
 
-    printf("%d", getNSpecialElement(m));
+    printf("%d", getNSpecialElement2(m));
 
     freeMemMatrix(m);
 }
@@ -1083,7 +1083,7 @@ int main() {
     //solvingProblemNumberFifteen();
     //solvingProblemNumberSixteen();
     //solvingProblemNumberSeventeen();
-    solvingProblemNumberEighteen();
+    //solvingProblemNumberEighteen();
 
     return 0;
 }

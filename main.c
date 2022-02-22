@@ -939,22 +939,45 @@ int min2(int a, int b) {
     return a < b ? a : b;
 }
 
+int max2(int a, int b) {
+    return a > b ? a : b;
+}
+
 int getNSpecialElement2(matrix m) {
+    matrix maxMatrix = getMemMatrix(m.nRows, m.nCols);
+    for (int i = 0; i < m.nRows; i++) {
+        maxMatrix.values[i][0] = m.values[i][0];
+        for (int j = 1; j < m.nCols; j++) {
+            maxMatrix.values[i][j] = max2(maxMatrix.values[i][j - 1], m.values[i][j]);
+        }
+    }
+
+    matrix minMatrix = getMemMatrix(m.nRows, m.nCols);
+    for (int i = 0; i < m.nRows; i++) {
+        minMatrix.values[i][m.nCols - 1] = m.values[i][m.nCols - 1];
+        for (int j = m.nCols - 2; j >= 0; j--) {
+            minMatrix.values[i][j] = min2(minMatrix.values[i][j + 1], m.values[i][j]);
+        }
+    }
+
     int count = 0;
     for (int i = 0; i < m.nRows; i++) {
         for (int j = 1; j < m.nCols - 1; j++) {
-            if (m.values[i][j] < m.values[i][j + 1] && m.values[i][j - 1] < m.values[i][j]) {
+            if (maxMatrix.values[i][j - 1] < m.values[i][j] && minMatrix.values[i][j + 1] > m.values[i][j]) {
                 count += 1;
             }
         }
 
-        if (m.nCols > 1 && m.values[i][0] < m.values[i][1]) {
+        if (m.nCols > 1 && m.values[i][0] < minMatrix.values[i][1]) {
             count += 1;
         }
-        if (m.nCols > 1 && m.values[i][m.nCols - 2] < m.values[i][m.nCols - 1]) {
+        if (m.nCols > 1 && maxMatrix.values[i][m.nCols - 2] < m.values[i][m.nCols - 1]) {
             count += 1;
         }
     }
+
+    freeMemMatrix(minMatrix);
+    freeMemMatrix(maxMatrix);
 
     return count;
 }
@@ -1081,7 +1104,7 @@ int main() {
     //solvingProblemNumberThirteen();
     //solvingProblemNumberFourteen();
     //solvingProblemNumberFifteen();
-    //solvingProblemNumberSixteen();
+    solvingProblemNumberSixteen();
     //solvingProblemNumberSeventeen();
     //solvingProblemNumberEighteen();
 

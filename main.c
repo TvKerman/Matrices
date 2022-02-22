@@ -971,6 +971,58 @@ void solvingProblemNumberSixteen() {
     freeMemMatrix(m);
 }
 
+double getScalarProduct(int *a, int *b, int n) {
+    double scalarProduct = 0;
+    for (int i = 0; i < n; i++) {
+        scalarProduct += a[i] * b[i];
+    }
+
+    return scalarProduct;
+}
+
+double getVectorLength(int *a, int n) {
+    double vectorLength = 0;
+    for (int i = 0; i < n; i++) {
+        vectorLength += a[i] * a[i];
+    }
+
+    return sqrt(vectorLength);
+}
+
+double getCosine(int *a, int *b, int n) {
+    return getScalarProduct(a, b, n) / getVectorLength(a, n) / getVectorLength(b, n);
+}
+
+int getVectorIndexWithMaxAngle(matrix m, int *b) {
+    int index = 0;
+    double maxAngle = absD(getCosine(m.values[0], b, m.nCols));
+    for (int i = 1; i < m.nRows; i++) {
+        double currentAngle = absD(getCosine(m.values[i], b, m.nCols));
+        if (currentAngle < maxAngle) {
+            maxAngle = currentAngle;
+            index = i;
+        }
+    }
+
+    return index;
+}
+
+void solvingProblemNumberSeventeen() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix b = getMemMatrix(1, col);
+    inputMatrix(b);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    printf("%d", getVectorIndexWithMaxAngle(m, b.values[0]));
+
+    freeMemMatrix(m);
+    freeMemMatrix(b);
+}
+
 int main() {
     test();
     //solvingProblemNumberOne();
@@ -988,7 +1040,8 @@ int main() {
     //solvingProblemNumberThirteen();
     //solvingProblemNumberFourteen();
     //solvingProblemNumberFifteen();
-    solvingProblemNumberSixteen();
+    //solvingProblemNumberSixteen();
+    solvingProblemNumberSeventeen();
 
     return 0;
 }

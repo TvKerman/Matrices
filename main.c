@@ -1023,6 +1023,47 @@ void solvingProblemNumberSeventeen() {
     freeMemMatrix(b);
 }
 
+long long getScalarProductIntVector(const int *a, const int *b, int n) {
+    long long scalarProduct = 0;
+    for (int i = 0; i < n; i++) {
+        scalarProduct += a[i] * b[i];
+    }
+
+    return scalarProduct;
+}
+
+long long getScalarProductRowAndCol(matrix m, int i, int j) {
+    int *a = (int *)malloc(m.nRows * sizeof(int));
+    for (int k = 0; k < m.nRows; k++) {
+        a[k] = m.values[k][j];
+    }
+
+    long long scalarProduct = getScalarProductIntVector(m.values[i], a, m.nRows);
+
+    free(a);
+
+    return scalarProduct;
+}
+
+long long getSpecialScalarProduct(matrix m) {
+    position maxValuePos = getMaxValuePos(m);
+    position minValuePos = getMinValuePos(m);
+
+    return getScalarProductRowAndCol(m, maxValuePos.rowIndex, minValuePos.colIndex);
+}
+
+void solvingProblemNumberEighteen() {
+    int row, col;
+    scanf("%d %d", &row, &col);
+
+    matrix m = getMemMatrix(row, col);
+    inputMatrix(m);
+
+    printf("%lld", getSpecialScalarProduct(m));
+
+    freeMemMatrix(m);
+}
+
 int main() {
     test();
     //solvingProblemNumberOne();
@@ -1041,7 +1082,8 @@ int main() {
     //solvingProblemNumberFourteen();
     //solvingProblemNumberFifteen();
     //solvingProblemNumberSixteen();
-    solvingProblemNumberSeventeen();
+    //solvingProblemNumberSeventeen();
+    solvingProblemNumberEighteen();
 
     return 0;
 }
